@@ -8,6 +8,14 @@ public class PlayerMovement : MonoBehaviour
     Animator anim;
     public static bool shouldUpdate;
     private static bool playerExists;
+    public enum playerOrientation
+    {
+        LEFT,
+        RIGHT,
+        UP,
+        DOWN
+    }
+    public static playerOrientation playerGuyOrientation;
 
     public void updateCase(bool casd)
     {
@@ -20,16 +28,16 @@ public class PlayerMovement : MonoBehaviour
         rbody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         shouldUpdate = true;
+        playerGuyOrientation = playerOrientation.DOWN;
         if (!playerExists)
         {
             playerExists = true;
             DontDestroyOnLoad(transform.gameObject);
         }
-        else {
+        else
+        {
             transform.gameObject.SetActive(false);
         }
-
-
     }
 
     void FixedUpdate()
@@ -45,11 +53,21 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetFloat("input_x", movement_vector.x);
                 anim.SetFloat("input_y", movement_vector.y);
             }
-            else {
+            else
+            {
                 anim.SetBool("iswalking", false);
             }
 
             rbody.MovePosition(rbody.position + movement_vector * Time.deltaTime);
+
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+                playerGuyOrientation = playerOrientation.LEFT;
+            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+                playerGuyOrientation = playerOrientation.RIGHT;
+            else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+                playerGuyOrientation = playerOrientation.UP;
+            else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+                playerGuyOrientation = playerOrientation.DOWN;
         }
         else if (shouldUpdate == false)
         {
