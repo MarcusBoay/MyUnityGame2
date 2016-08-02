@@ -12,7 +12,6 @@ public class MainMenuSwitch : MonoBehaviour
     public bool[] isActiveButtons;
     public static GameObject selected1;
     //for title and description panels
-    private bool x;
     public GameObject[] panels1;
     public bool[] isActivePanels1;
     //for items, skills, etc panels
@@ -114,27 +113,19 @@ public class MainMenuSwitch : MonoBehaviour
         {
             if (isActiveButtons[0] || isActiveButtons[1] || isActiveButtons[2] || isActiveButtons[3] || isActiveButtons[4] || isActiveButtons[5] || isActiveButtons[6] || isActiveButtons[7] || isActiveButtons[8] || isActiveButtons[9])
             {
-                x = false;
+                isActivePanels1[0] = false;
+                isActivePanels1[1] = false;
+                isActivePanels1[2] = false;
+                isActivePanels1[3] = true;
+                isActivePanels1[4] = true;
             }
             else
-            {
-                x = true;
-            }
-            if (x)
             {
                 isActivePanels1[0] = true;
                 isActivePanels1[1] = true;
                 isActivePanels1[2] = true;
                 isActivePanels1[3] = false;
                 isActivePanels1[4] = false;
-            }
-            else
-            {
-                isActivePanels1[0] = false;
-                isActivePanels1[1] = false;
-                isActivePanels1[2] = false;
-                isActivePanels1[3] = true;
-                isActivePanels1[4] = true;
             }
         }
     }
@@ -153,6 +144,8 @@ public class MainMenuSwitch : MonoBehaviour
         {
             panels2[13].SetActive(isActiveButtons[0]);
             panels2[14].SetActive(isActiveButtons[0]);
+            isActivePanels2[13] = isActiveButtons[0];
+            isActivePanels2[14] = isActiveButtons[0];
         }
     }
 
@@ -161,6 +154,7 @@ public class MainMenuSwitch : MonoBehaviour
         if (isActive)
         {
             panels2[0].SetActive(isActiveButtons[2]);
+            isActivePanels2[0] = isActiveButtons[2];
         }
     }
 
@@ -171,6 +165,9 @@ public class MainMenuSwitch : MonoBehaviour
             panels2[10].SetActive(isActiveButtons[1]);
             panels2[11].SetActive(isActiveButtons[1]);
             panels2[12].SetActive(isActiveButtons[1]);
+            isActivePanels2[10] = isActiveButtons[1];
+            isActivePanels2[11] = isActiveButtons[1];
+            isActivePanels2[12] = isActiveButtons[1];
         }
     }
 
@@ -187,6 +184,7 @@ public class MainMenuSwitch : MonoBehaviour
         if (isActive)
         {
             panels2[5].SetActive(isActiveButtons[4]);
+            isActivePanels2[5] = isActiveButtons[4];
         }
     }
 
@@ -196,6 +194,8 @@ public class MainMenuSwitch : MonoBehaviour
         {
             panels2[15].SetActive(isActiveButtons[7]);
             panels2[17].SetActive(isActiveButtons[7]);
+            isActivePanels2[15] = isActiveButtons[7];
+            isActivePanels2[17] = isActiveButtons[7];
         }
     }
 
@@ -204,6 +204,7 @@ public class MainMenuSwitch : MonoBehaviour
         if (isActive)
         {
             panels2[16].SetActive(isActiveButtons[9]);
+            isActivePanels2[16] = isActiveButtons[9];
         }
     }
 }
