@@ -1,13 +1,14 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class ItemPanel : MonoBehaviour
 {
     private GameObject MMM;
     private GameObject IM;
     private GameObject ILP;
-    public Text prefabText;
+    public Button prefabButton;
 
     void Start()
     {
@@ -20,17 +21,20 @@ public class ItemPanel : MonoBehaviour
     {
         if (!MMM.GetComponent<MainMenuSwitch>().isActivePanels2[13])
         {
-            foreach (GameObject text in ILP.transform) //wtf is going on here? HALP
-            {
-                Destroy(text);
-            }
+            //Deletes all items before the new set of items are shown, prevents duplicates of items when item panel is turned on and off
+            var children = new List<GameObject>();
+            foreach (Transform child in ILP.transform)
+                children.Add(child.gameObject);
+            children.ForEach(child => Destroy(child));
+            //makes item buttons show up
             for (int i = 0; i < IM.GetComponent<ItemManager>().itemNames.Length; i++)
             {
                 if (IM.GetComponent<ItemManager>().itemQuantities[i] > 0)
                 {
-                    Text text = Instantiate(prefabText, new Vector3(0, 0, 0), Quaternion.identity) as Text;
-                    text.transform.SetParent(ILP.transform);
-                    text.text = IM.GetComponent<ItemManager>().itemNames[i];
+                    Button button = Instantiate(prefabButton, new Vector3(0,0,0), Quaternion.identity) as Button;
+                    button.transform.SetParent(ILP.transform);
+                    button.transform.FindChild("Text").GetComponent<Text>().text = IM.GetComponent<ItemManager>().itemNames[i];
+                    button.transform.localScale = new Vector3(1, 1, 1);
                 }
             }
         }
